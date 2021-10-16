@@ -1,24 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// eslint-disable-next-line
+import React from "react";
+// eslint-disable-next-line
+import logo from "./logo.svg";
+import "./App.scss";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <img src={logo} alt="company logo"></img>
+      <form>
+        <section>
+          <label>Cart value</label>
+          <input type="number" />
+          <span className="symbol">€</span>
+        </section>
+        <section>
+          <label>Delivery distance</label>
+          <input type="number" />
+          <span className="symbol">m</span>
+        </section>
+        <section>
+          <label>Amount of items</label>
+          <input type="number" />
+          <span className="symbol"></span>
+        </section>
+        <section>
+          <label>Date</label>
+          <input type="date" />
+          <span className="symbol"></span>
+        </section>
+        <section>
+          <label>Time</label>
+          <input type="time" />
+          <span className="symbol"></span>
+        </section>
+        <button className="wolt" type="button">
+          Calculate delivery price
+        </button>
+      </form>
     </div>
   );
 }
