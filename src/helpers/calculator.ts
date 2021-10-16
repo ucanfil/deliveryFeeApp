@@ -40,9 +40,10 @@ const multiplyWith0_50 = multiplyWith(0.5);
 const multiplyWith1_10 = multiplyWith(1.1);
 
 const getDate = (state: AppState) =>
-  new Date(`${state.date.split("/").join(",")}, ${state.time} GMT+0000`);
-const getDateDay = (state: AppState) => getDate(state).getUTCDay();
-const getDateHours = (state: AppState) => getDate(state).getUTCHours();
+  new Date(Date.parse(`${state.date}T${state.time}:00Z`));
+
+export const getDateDay = (state: AppState) => getDate(state).getUTCDay();
+export const getDateHours = (state: AppState) => getDate(state).getUTCHours();
 
 const isFriday = pipe(getDateDay, equals(5));
 

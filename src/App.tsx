@@ -1,15 +1,7 @@
 import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.scss";
-import {
-  Formik,
-  FormikHelpers,
-  FormikProps,
-  Form,
-  Field,
-  FieldProps,
-  ErrorMessage,
-} from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import { finalFee, deliveryFee } from "./helpers/calculator";
 
 export type IForm = {
