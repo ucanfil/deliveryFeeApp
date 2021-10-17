@@ -22,7 +22,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "lint": "eslint \"./src/**/*.{ts,tsx}\""
   },
@@ -49,5 +49,20 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "prettier": "^2.4.1"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest",
+      "^.+\\.svg$": "<rootDir>/svgTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!ramda)"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setuptests.ts"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    }
   }
 }
