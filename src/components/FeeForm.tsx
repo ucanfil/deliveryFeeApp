@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { IFormField, ISetFee } from "../interfaces/interfaces";
-import { deliveryFee, finalFee } from "../helpers/calculator";
+import { finalFee } from "../helpers/calculator";
 import { validate } from "../helpers/validator";
 
 export const FeeForm = ({ setFee }: ISetFee) => {
@@ -22,15 +22,13 @@ export const FeeForm = ({ setFee }: ISetFee) => {
         const { cartValue, deliveryDistance, itemAmount, date, time } = values;
 
         setFee(
-          finalFee(
-            deliveryFee({
-              cartValue: Number(cartValue),
-              deliveryDistance: Number(deliveryDistance),
-              itemAmount: Number(itemAmount),
-              date,
-              time,
-            })
-          )
+          finalFee({
+            cartValue: Number(cartValue),
+            deliveryDistance: Number(deliveryDistance),
+            itemAmount: Number(itemAmount),
+            date,
+            time,
+          })
         );
       }}
     >

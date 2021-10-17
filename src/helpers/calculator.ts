@@ -29,7 +29,7 @@ const isCartValueGteTo100 = (state: IForm) =>
   greaterThanOrEqualTo100(state.cartValue);
 const subtractFrom10 = pipe(subtract(10), round);
 const minus = (num: number) => pipe(subtract(__, num), round);
-const divideTo = (num: number) => pipe(divide(__, num), round);
+const divideTo = (num: number) => divide(__, num);
 const multiplyWith = (num: number) => pipe(multiply(num), round);
 const minus4 = minus(4);
 const minus1000 = minus(1000);
@@ -40,8 +40,8 @@ const multiplyWith1_10 = multiplyWith(1.1);
 const getDate = (state: IForm) =>
   new Date(Date.parse(`${state.date}T${state.time}:00Z`));
 
-export const getDateDay = (state: IForm) => getDate(state).getUTCDay();
-export const getDateHours = (state: IForm) => getDate(state).getUTCHours();
+const getDateDay = (state: IForm) => getDate(state).getUTCDay();
+const getDateHours = (state: IForm) => getDate(state).getUTCHours();
 
 const isFriday = pipe(getDateDay, equals(5));
 
@@ -50,7 +50,7 @@ const isRushHour = pipe(
   both(greaterThanOrEqualTo15, lessThanOrEqualTo19)
 );
 
-const isOnFridayRushhour = both(isFriday, isRushHour);
+export const isOnFridayRushhour = both(isFriday, isRushHour);
 
 const fees = (state: IForm) =>
   map(
@@ -62,17 +62,17 @@ const totalFees = pipe(fees, sum);
 
 const totalFeesWithMultiplier = pipe(totalFees, multiplyWith1_10);
 
-const feeFromCartSurcharge = (state: IForm) =>
+export const feeFromCartSurcharge = (state: IForm) =>
   ifElse(greaterThanOrEqualTo10, always(0), subtractFrom10)(state.cartValue);
 
-const feeFromDistance = (state: IForm) =>
+export const feeFromDistance = (state: IForm) =>
   ifElse(
     lessThanOrEqualTo1000,
     always(2),
     pipe(minus1000, divideTo500, Math.ceil, add(2))
   )(state.deliveryDistance);
 
-const feeFromItemAmount = (state: IForm) =>
+export const feeFromItemAmount = (state: IForm) =>
   ifElse(
     greaterThanOrEqualTo5,
     pipe(minus4, multiplyWith0_50),
@@ -85,5 +85,5 @@ export const deliveryFee = ifElse(
   ifElse(isOnFridayRushhour, totalFeesWithMultiplier, totalFees)
 );
 
-export const finalFee = (fee: number) =>
-  when(greaterThanOrEqualTo15, always(15))(fee);
+export const finalFee = (state: IForm) =>
+  when(greaterThanOrEqualTo15, always(15))(deliveryFee(state));
