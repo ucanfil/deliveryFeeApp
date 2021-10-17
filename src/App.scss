@@ -14,6 +14,13 @@ body, p, input, select, textarea, button {
   font-size: $ruler;
 }
 
+@mixin width-alignment {
+  width: 60vw;
+  min-width: 300px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 img {
   width: 7.5rem;
   height: 7.5rem;
@@ -34,11 +41,8 @@ div, p {
   text-shadow: 1px 1px 1px $color-white;
 }
 
-form {
-  width: 60vw;
-  min-width: 300px;
-  max-width: 500px;
-  margin: 0 auto;
+form, .result {
+  @include width-alignment
 }
 
 button, input {
@@ -115,4 +119,10 @@ button {
 
 .error {
   color: red;
+}
+
+.result {
+  font-size: $ruler * 1.25;
+  font-weight: bold;
+  margin-top: $ruler * 2;
 }
