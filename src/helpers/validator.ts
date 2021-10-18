@@ -1,6 +1,7 @@
 import { FormValues } from "../enums/FormValues";
 import { IErrors } from "../interfaces/interfaces";
 
+const positiveIntegerRegex = /^[1-9]\d*$/;
 const positiveNumberRegex =
   /^([0-9]*[1-9][0-9]*(\.[0-9]+)?|[0]+\.[0-9]*[1-9][0-9]*)$/;
 const dateRegex = /^\d{4}-(0?[1-9]|1[012])-(0?[1-9]|[12][0-9]|3[01])$/;
@@ -13,9 +14,13 @@ export const validate = (values: { [key in FormValues]: string }) => {
     switch (value) {
       case FormValues.cartValue:
       case FormValues.deliveryDistance:
-      case FormValues.itemAmount:
         if (!positiveNumberRegex.test(values[value])) {
           errors[value] = "Please provide a positive number";
+        }
+        break;
+      case FormValues.itemAmount:
+        if (!positiveIntegerRegex.test(values[value])) {
+          errors[value] = "Please provide a positive integer";
         }
         break;
       case FormValues.date:
