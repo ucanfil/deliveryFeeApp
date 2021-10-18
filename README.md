@@ -1,46 +1,53 @@
-# Getting Started with Create React App
+# Delivery Fee Calculator
+
+Application calculates delivery fee based on some conditions, see specifications further down to this page.
+
+I'm not a functional programming guru or anything, trying to learn it still. But to me, it helps you write cleaner functions, pure functions, and allows function compositions. Therefore I wrote calculator logic with the help of [Ramda.js](https://ramdajs.com/docs/) a functional programming library for JavaScript.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+Unzip the homework.zip file and in the unzipped project directory:
 
-### `npm start`
+* Install all project dependencies with `npm install`
+* Start the development server with `npm start` on `localhost:3000`
+* To run the tests use `npm test`
+* If you bump into any dependency error even after following the steps above, it might be related with some of the dependencies clashes with your node version. My node version was `v14.16.0` so as a last resort downgrading/upgrading to this version might help you run it successfully.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Specification
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Application calculates delivery fee based on some conditions:
 
-### `npm test`
+    - If the cart value is less than 10€, a small order surcharge is added to the delivery
+    price. The surcharge is the difference between the cart value and 10€. For example if
+    the cart value is 8.90€, the surcharge will be 1.10€.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+    - A delivery fee for the first 1000 meters (=1km) is 2€. If the delivery distance is longer
+    than that, 1€ is added for every additional 500 meters that the courier needs to
+    travel before reaching the destination. Even if the distance would be shorter than
+    500 meters, the minimum fee is always 1€.
 
-### `npm run build`
+    - If the amount of items is five or more, an additional 50 cent surcharge is added for
+    each items above five.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    - The delivery fee can never be more than 15€, including possible surcharges.
+    - The delivery is free (0€) when the cart value is equal or more than 100€.
+    - During the Friday rush (3 - 7 PM UTC), the delivery fee will be multiplied by 1.1x.
+    However the fee still cannot be more than the max (15€).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Built With
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* React
+* TypeScript
+* Ramda.js
+* Formik
+* Flexbox, Scss
 
-### `npm run eject`
+## Authors
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  - Burak Tilek - [Ucanfil](https://github.com/ucanfil)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Acknowledgements
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+* Neomorphic form design [from](https://codepen.io/swapnet/pen/QWwPVwE)
